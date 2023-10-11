@@ -23,6 +23,7 @@ bash 5.1.6
 
 - Bash 5.1.6 ou superior
 - Permissões de administrador para instalar os pacotes
+- chmod +x kind_install_v2.sh
 
 ## Instalação
 
