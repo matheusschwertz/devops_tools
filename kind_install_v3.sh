@@ -118,6 +118,12 @@ function install_git() {
   esac
 }
 
+# Esta função configura o Git com o nome de usuário e e-mail.
+function configure_git() {
+  git config --global user.name "matheusschertz"
+  git config --global user.email "matheusschertz@gmail.com"
+}
+
 # ------------------------------------------------------------------------ #
 
 # ------------------------------- TESTES ----------------------------------------- #
@@ -136,6 +142,9 @@ function install_git() {
 [ -z "`which aws`" ] && install_aws_cli
 # Verifica se 'git' está instalado e o instala se não estiver.
 [ -z "`which git`" ] && install_git
+
+# Configura o Git
+configure_git
 
 # ------------------------------------------------------------------------ #
 
