@@ -1,4 +1,4 @@
-# kind-install.sh
+# tools-install.sh
 
 Script para instalar ferramentas relacionadas ao Kubernetes (kind, kubectl, Docker)
 
