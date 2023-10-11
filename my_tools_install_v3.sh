@@ -16,7 +16,7 @@
 #    - Git: Sistema de controle de versão distribuído.
 #
 #  Exemplos:
-#      $ ./kind-install.sh
+#      $ ./tools-install_v?.sh
 # ------------------------------------------------------------------------ #
 # Testado em:
 #   bash 5.1.6
