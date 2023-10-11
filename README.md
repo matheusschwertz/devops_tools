@@ -32,3 +32,4 @@ bash 5.1.6
 $ ./kind-install.sh
 
 $ newgrp docker
+# devops_tools
