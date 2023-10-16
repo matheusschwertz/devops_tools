@@ -14,6 +14,9 @@
 #    - Terraform: Ferramenta para construir, alterar e versionar infraestrutura de forma eficiente.
 #    - AWS CLI: 
 #    - Git: Sistema de controle de versão distribuído.
+#    - Visual Studio Code: Editor de código-fonte.
+#    - Vagrant: Ferramenta para criar e gerenciar ambientes de desenvolvimento virtualizados.
+#    - VirtualBox: Plataforma de virtualização.
 #
 #  Exemplos:
 #      $ ./tools-install_v?.sh
@@ -124,6 +127,52 @@ function configure_git() {
   git config --global user.email "matheusschertz@gmail.com"
 }
 
+function install_vscode() {
+  # Instala o Visual Studio Code
+  case "`get_distro`" in
+    ubuntu)
+      curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg
+      sudo install -o root -g root -m 644 microsoft.gpg /usr/share/keyrings/microsoft-archive-keyring.gpg
+      sudo sh -c 'echo "deb [arch=amd64 signed-by=/usr/share/keyrings/microsoft-archive-keyring.gpg] https://packages.microsoft.com/repos/vscode stable main" > /etc/apt/sources.list.d/vscode.list'
+      sudo apt-get install apt-transport-https
+      sudo apt-get update
+      sudo apt-get install code
+      rm microsoft.gpg
+      ;;
+    fedora)
+      sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
+      sudo sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/yum.repos.d/vscode.repo'
+      sudo dnf check-update
+      sudo dnf install code
+      ;;
+  esac
+}
+
+function install_vagrant() {
+  # Instala o Vagrant
+  case "`get_distro`" in
+    ubuntu)
+      sudo apt update
+      sudo apt install vagrant -y
+      ;;
+    fedora)
+      sudo dnf install vagrant -y
+      ;;
+  esac
+}
+
+function install_virtualbox() {
+  # Instala o VirtualBox
+  case "`get_distro`" in
+    ubuntu)
+      sudo apt update
+      sudo apt install virtualbox -y
+      ;;
+    fedora)
+      sudo dnf install VirtualBox -y
+      ;;
+  esac
+}
 # ------------------------------------------------------------------------ #
 
 # ------------------------------- TESTES ----------------------------------------- #
@@ -142,6 +191,12 @@ function configure_git() {
 [ -z "`which aws`" ] && install_aws_cli
 # Verifica se 'git' está instalado e o instala se não estiver.
 [ -z "`which git`" ] && install_git
+# Verifica se 'code' está instalado e o instala se não estiver.
+[ -z "`which code`" ]    && install_vscode
+# Verifica se 'vagrant' está instalado e o instala se não estiver.
+[ -z "`which vagrant`" ] && install_vagrant
+# Verifica se 'virtualbox' está instalado e o instala se não estiver.
+[ -z "`which virtualbox`" ] && install_virtualbox
 
 # Configura o Git
 configure_git
